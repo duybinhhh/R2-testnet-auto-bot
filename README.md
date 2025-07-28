@@ -69,5 +69,9 @@ It does **not** constitute financial, investment, or legal advice.
 Use at your own risk. The author is not responsible for any damages or losses.**
 
 
+## 📄 License
+
+MIT License
+
 **DUYBINH**
 
