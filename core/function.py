@@ -32,8 +32,9 @@ def swap_tokens(web3, account, from_token, to_token, amount):
             'maxFeePerGas': web3.to_wei(2, "gwei"),
             'maxPriorityFeePerGas': web3.to_wei(1, "gwei"),
             'nonce': web3.eth.get_transaction_count(account.address),
-            'gas': 300000
         }
+        estimated_gas = web3.eth.estimate_gas(tx)
+        tx['gas'] = int(estimated_gas * 1.2)  # thêm buffer 20%
 
         #print("📤 Signing and sending direct swap transaction to R2USD...")
         signed_tx = web3.eth.account.sign_transaction(tx, private_key=account.key)
@@ -73,8 +74,9 @@ def stake_tokens(web3, account, from_token, to_token, amount):
             'nonce': web3.eth.get_transaction_count(account.address),
             'maxFeePerGas': web3.to_wei(2, 'gwei'),
             'maxPriorityFeePerGas': web3.to_wei(1, 'gwei'),
-            'gas': 300000
         }
+        estimated_gas = web3.eth.estimate_gas(tx)
+        tx['gas'] = int(estimated_gas * 1.2)
 
         print("📤 Sending staking transaction...")
         signed_tx = web3.eth.account.sign_transaction(tx, private_key=account.key)
@@ -90,3 +92,44 @@ def stake_tokens(web3, account, from_token, to_token, amount):
         print("❌ Error in perform_stake.")
         traceback.print_exc()
         return None
+
+def stake_WBTC(web3, account, token_address, staking_contract, amount):
+    try:
+        approve_token(web3, account, token_address, staking_contract, amount)
+
+        stake_abi = read_json_file("config/abi/swap_abi.json")
+        token_abi_ = read_json_file("config/abi/token_abi.json")
+        contract_token = web3.eth.contract(address=token_address, abi=token_abi_)
+        decimals = contract_token.functions.decimals().call()
+        amount_in = int(amount * (10 ** decimals)) 
+        contract_stake = web3.eth.contract(address=staking_contract, abi=stake_abi)
+
+        estimated_gas = contract_stake.functions.stake(token_address, amount_in).estimate_gas({
+            'from': account.address
+        })
+         
+
+        tx = contract_stake.functions.stake(token_address,amount_in).build_transaction({
+            'chainId': CHAIN_ID,
+            'from': account.address,
+            'nonce': web3.eth.get_transaction_count(account.address),
+            'maxFeePerGas': web3.to_wei(2, 'gwei'),
+            'maxPriorityFeePerGas': web3.to_wei(1, 'gwei'),
+            'gas': int(estimated_gas * 1.2) 
+        })
+        print("📤 Sending staking transaction...")
+        signed_tx = web3.eth.account.sign_transaction(tx, private_key=account.key)
+        tx_hash = web3.eth.send_raw_transaction(signed_tx.raw_transaction)
+
+        print(f"🔄 Transaction sent: {web3.to_hex(tx_hash)}")
+        receipt = web3.eth.wait_for_transaction_receipt(tx_hash, timeout=300)
+        print(f"✅ Stake successful! 🧾 Tx: https://sepolia.etherscan.io/tx/{web3.to_hex(tx_hash)}")
+
+        return tx_hash
+    except Exception as e:
+        import traceback
+        print("❌ Error in perform_stake.")
+        traceback.print_exc()
+        return None
+
+

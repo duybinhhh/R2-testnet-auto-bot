@@ -48,5 +48,26 @@
       { "name": "amountB", "type": "uint256" },
       { "name": "liquidity", "type": "uint256" }
     ]
+  },
+  
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_candidate",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "stake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
+
+
 ]

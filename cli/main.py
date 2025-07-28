@@ -1,10 +1,10 @@
 from web3 import Web3
 from eth_account import Account
 from config.setting import PRIVATE_KEY, ADDRESS
-from config.constants import RPC_URL, USDC, R2USD,sR2USD
-from core.function import swap_tokens , stake_tokens
+from config.constants import RPC_URL, USDC, R2USD,sR2USD,WBTC,STAKING_CONTRACT
+from core.function import swap_tokens , stake_tokens, stake_WBTC
 from utils.helpers import check_connection, check_balance
-
+import traceback
 
 def main():
     try:
@@ -18,6 +18,7 @@ def main():
             print("\n🎯 SWAP MENU")
             print("1️⃣  Swap USDC ➜ R2USD")
             print("2️⃣  Stake R2USD ➜ sR2USD")
+            print("3️⃣  Stake WBTC ➜ R2WBTC")
             print("0️⃣  Exit program")
             choice = input("👉 Enter your choice: ").strip()
 
@@ -39,7 +40,6 @@ def main():
                         print("❌ Swap failed.")
 
                 except Exception as e:
-                    import traceback
                     print("❌ Error during swap:")
                     traceback.print_exc()
             elif choice == "2":
@@ -57,8 +57,25 @@ def main():
                     else:
                         print("❌ Stake failed.")
                 except Exception as e:
-                    import traceback
                     print("❌ Error during stake:")
+                    traceback.print_exc()
+            elif choice == "3":
+                wbtc_balance = check_balance(web3, account, WBTC)
+                print(f"\n💰 Current WBTC balance: {wbtc_balance} WBTC")
+
+                amount_str = input("✏️  Enter the amount of WBTC to stake: ").strip()
+                try:
+                    amount = float(amount_str)
+                    print("📥 Staking WBTC in progress...")
+
+                    tx_hash = stake_WBTC(web3, account, WBTC, STAKING_CONTRACT, amount)
+
+                    if tx_hash:
+                        print(f"✅ Stake WBTC successful! 🧾 Tx Hash: {tx_hash.hex()}")
+                    else:
+                        print("❌ Stake WBTC failed.")
+                except Exception as e:
+                    print("❌ Error during WBTC stake:")
                     traceback.print_exc()
 
 
