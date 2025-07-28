@@ -80,6 +80,6 @@ If you have questions, suggestions, or issues, feel free to contact me or open a
 
 ## ⚠️ Disclaimer
 
-This project is intended for educational purposes only.  
+**This project is intended for educational purposes only.  
 It does **not** constitute financial, investment, or legal advice.  
-Use at your own risk. The author is not responsible for any damages or losses.
+Use at your own risk. The author is not responsible for any damages or losses.**
