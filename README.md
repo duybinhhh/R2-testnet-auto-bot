@@ -38,20 +38,6 @@ Then open the `.env` file and fill in your `PRIVATE_KEY`, wallet `ADDRESS`.
 python cli/main.py
 ```
 
-## 📁 Project Structure
-
-```
-.
-├── cli/               # Entry point for running the bot
-├── config/            # Constants, ABIs, and network settings
-├── core/              # Business logic
-├── utils/             # Helper functions
-├── .env               # Sensitive data (NOT committed)
-├── .env.example       # Template for environment variables
-├── requirements.txt   # Python dependencies
-├── .gitignore         # Files to ignore in version control
-
-```
 
 ## 🛡 Prerequisites
 
