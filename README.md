@@ -6,6 +6,7 @@ A Python bot to automatically interact with smart contracts on the Ethereum Sepo
 
 - Swap USDC → R2USD (1x Rewards/hr)
 - Stake R2 → sR2USD (10x Rewards/hr)
+- Stake WBTC → R2WBTC
 - Add liquidity: USDC → R2USD _(coming soon)_ (10x Rewards/hr)
 - Add liquidity: R2USD → sR2USD _(coming soon)_ (20x Rewards/hr)
 
@@ -38,7 +39,6 @@ Then open the `.env` file and fill in your `PRIVATE_KEY`, wallet `ADDRESS`.
 python cli/main.py
 ```
 
-
 ## 🛡 Prerequisites
 
 - Python 3.10+
@@ -55,7 +55,6 @@ EVM: 0x43946901a5533d3Fe0B16e94d09AF05c113b14a6
 
 SOL: 29bpksBWKT4gbdNzbMMFYHUEQfxdJt1v73TB2KA3wswB
 
-
 Thank you for visiting this repository! 🌟
 
 Don't forget to contribute by following and starring ⭐️.
@@ -68,10 +67,8 @@ If you have questions, suggestions, or issues, feel free to contact me or open a
 It does **not** constitute financial, investment, or legal advice.  
 Use at your own risk. The author is not responsible for any damages or losses.**
 
-
 ## 📄 License
 
 MIT License
 
 **DUYBINH**
-
