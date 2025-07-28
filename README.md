@@ -73,7 +73,7 @@ Thank you for visiting this repository! 🌟
 Don't forget to contribute by following and starring ⭐️.
 If you have questions, suggestions, or issues, feel free to contact me or open an issue.
 
-— DUYBINH
+**DUYBINH**
 
 ## ⚠️ Disclaimer
 
