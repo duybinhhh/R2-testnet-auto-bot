@@ -7,8 +7,11 @@ A Python bot to automatically interact with smart contracts on the Ethereum Sepo
 - Swap USDC → R2USD (1x Rewards/hr)
 - Stake R2 → sR2USD (10x Rewards/hr)
 - Stake WBTC → R2WBTC
-- Add liquidity: USDC → R2USD _(coming soon)_ (10x Rewards/hr)
-- Add liquidity: R2USD → sR2USD _(coming soon)_ (20x Rewards/hr)
+- Add liquidity: USDC → R2USD (10x Rewards/hr)
+- Add liquidity: R2USD → sR2USD (20x Rewards/hr)
+- Get price data from API
+
+![alt text](image.png)
 
 ## 🔧 Installation
 

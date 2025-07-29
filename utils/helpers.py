@@ -3,6 +3,7 @@ from config.constants import RPC_URL
 from web3 import Web3
 import time
 import traceback
+import requests
 
 def check_connection(retries=3, timeout=60):
     request_kwargs = {
@@ -34,10 +35,10 @@ def approve_token(web3, account, token_address, spender_address, amount):
         amount_with_decimals = int(amount * (10 ** decimals))
 
         allowance = token_contract.functions.allowance(account.address, spender_address).call()
-        print(f"🔍 Current allowance: {allowance}, required: {amount_with_decimals}")
+        #print(f"🔍 Current allowance: {allowance}, required: {amount_with_decimals}")
 
         if allowance < amount_with_decimals:
-            print("🔐 Need to approve more...")
+            #print("🔐 Need to approve more...")
             approve_data = token_contract.functions.approve(spender_address, 2 ** 256 - 1)
             estimated_gas = approve_data.estimate_gas({"from": account.address})
             max_priority_fee = web3.to_wei(1, "gwei")
@@ -58,8 +59,8 @@ def approve_token(web3, account, token_address, spender_address, amount):
 
             print(f"✅ Approve successful! Tx: https://sepolia.etherscan.io/tx/{web3.to_hex(tx_hash)}")
             return receipt
-        else:
-            print("✅ Sufficient allowance, no need to approve.")
+        #else:
+            #print("✅ Sufficient allowance, no need to approve.")
     except Exception as e:
         print("❌ Error during approve:")
         traceback.print_exc()
@@ -74,3 +75,21 @@ def check_balance(web3, account, token_address):
         return  balance / (10 ** decimals)
     except Exception as e:
         raise Exception(f"Checking Token Balance Failed: {str(e)}") 
+    
+
+def get_price(token : str):
+    url = "https://testnet2.r2.money/v1/public/dashboard"
+    
+    with requests.Session() as session:
+        try:
+            response = session.get(url, timeout=10)
+            response.raise_for_status()  # kiểm tra lỗi HTTP
+            
+            data = response.json()
+            price = float(data["data"]["price"][token])
+            return price
+        
+        except Exception as e:
+            print(f"❌ Lỗi khi lấy giá: {e}")
+            return None
+
