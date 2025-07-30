@@ -53,7 +53,7 @@ Then open the `.env` file and fill in your `PRIVATE_KEY`, wallet `ADDRESS`.
 ## ▶️ Running the bot
 
 ```bash
-python cli/main.py
+python -m cli.main
 ```
 
 ## 🛡 Prerequisites
