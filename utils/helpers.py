@@ -5,13 +5,13 @@ import time
 import traceback
 import requests
 
-def check_connection(retries=3, timeout=60):
+def check_connection(URL, retries=3, timeout=60):
     request_kwargs = {
         'timeout': timeout
     }
     for attempt in range(retries):
         try:
-            web3 = Web3(Web3.HTTPProvider(RPC_URL, request_kwargs=request_kwargs))
+            web3 = Web3(Web3.HTTPProvider(URL, request_kwargs=request_kwargs))
             web3.eth.get_block_number()
             return web3
         except Exception as e:
@@ -27,7 +27,7 @@ def read_json_file(file_path):
 
 
 
-def approve_token(web3, account, token_address, spender_address, amount):
+def approve_token(web3, account, token_address, spender_address, amount,network:None):
     token_abi = read_json_file('config/abi/token_abi.json')
     try:
         token_contract = web3.eth.contract(address=token_address, abi=token_abi)
@@ -57,7 +57,7 @@ def approve_token(web3, account, token_address, spender_address, amount):
             tx_hash = web3.eth.send_raw_transaction(signed_tx.raw_transaction)
             receipt = web3.eth.wait_for_transaction_receipt(tx_hash, timeout=300)
 
-            print(f"✅ Approve successful! Tx: https://sepolia.etherscan.io/tx/{web3.to_hex(tx_hash)}")
+            print(f"✅ Approve successful! Tx: {network}{web3.to_hex(tx_hash)}")
             return receipt
         #else:
             #print("✅ Sufficient allowance, no need to approve.")

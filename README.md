@@ -4,12 +4,26 @@ A Python bot to automatically interact with smart contracts on the Ethereum Sepo
 
 ## 🚀 Features
 
-- Swap USDC → R2USD (1x Rewards/hr)
-- Stake R2 → sR2USD (10x Rewards/hr)
-- Stake WBTC → R2WBTC
-- Add liquidity: USDC → R2USD (10x Rewards/hr)
-- Add liquidity: R2USD → sR2USD (20x Rewards/hr)
-- Get price data from API
+This bot supports the following functionalities on both Sepolia and Monad testnets:
+
+- 🔁 **Token Swap**: USDC → R2USD  
+  ‣ Earn: `1x Rewards/hr`
+
+- 📥 **Staking**:  
+  ‣ R2USD → sR2USD — `10x Rewards/hr`  
+  ‣ WBTC → R2WBTC — no infor rewards
+
+- 💧 **Add Liquidity**:  
+  ‣ USDC + R2USD → LP — `10x Rewards/hr`  
+  ‣ R2USD + sR2USD → LP — `20x Rewards/hr`
+
+Each action will automatically handle allowance approvals and transaction gas settings.
+
+**NETWORK"**
+
+![alt text](image-1.png)
+
+**FUNCTIONS**
 
 ![alt text](image.png)
 
