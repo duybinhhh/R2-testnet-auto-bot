@@ -4,7 +4,7 @@ A Python bot to automatically interact with smart contracts on the Ethereum Sepo
 
 ## 🚀 Features
 
-This bot supports the following functionalities on both Sepolia and Monad testnets:
+This bot supports the following functionalities on **Sepolia**, **Pharos** and **Monad testnets**:
 
 - 🔁 **Token Swap**: USDC → R2USD  
   ‣ Earn: `1x Rewards/hr`
@@ -19,9 +19,9 @@ This bot supports the following functionalities on both Sepolia and Monad testne
 
 Each action will automatically handle allowance approvals and transaction gas settings.
 
-**NETWORK"**
+**NETWORK**
 
-![alt text](image-1.png)
+![alt text](image-2.png)
 
 **FUNCTIONS**
 
